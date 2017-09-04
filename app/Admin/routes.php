@@ -12,4 +12,5 @@ Route::group([
 
     $router->get('/', 'HomeController@index');
 
+    $router->get('/report', 'ReportController@index');
 });
