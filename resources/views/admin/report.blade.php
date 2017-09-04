@@ -14,12 +14,14 @@ table.table-bordered > tbody > tr > td{
     <table border="0" cellspacing="5" cellpadding="5">
         <tbody>
             <tr>
-                <td>Minimum age:</td>
-                <td><input type="text" id="min" name="min"></td>
-            </tr>
-            <tr>
-                <td>Maximum age:</td>
-                <td><input type="text" id="max" name="max"></td>
+                <td>時間區間： </td>
+                <td>
+                <div id="event_period" class="input-group">
+                    <input id="start_date" name="start_date" type="text" class="form-control actual_range">
+                    <div class="input-group-addon">to</div>
+                    <input id="end_date" name="end_date" type="text" class="form-control actual_range">
+                </div>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -509,22 +511,6 @@ table.table-bordered > tbody > tr > td{
 {!!
 $Admin->script('
 
-    $.fn.dataTable.ext.search.push(
-        function( settings, data, dataIndex ) {
-            var min = parseInt( $(\'#min\').val(), 10 );
-            var max = parseInt( $(\'#max\').val(), 10 );
-            var age = parseFloat( data[3] ) || 0; // use data for the age column
-    
-            if ( ( isNaN( min ) && isNaN( max ) ) ||
-                ( isNaN( min ) && age <= max ) ||
-                ( min <= age   && isNaN( max ) ) ||
-                ( min <= age   && age <= max ) )
-            {
-                return true;
-            }
-            return false;
-        }
-    );
     var table = $(\'#example\').DataTable(
         {
             "paging":   false
@@ -532,9 +518,31 @@ $Admin->script('
     );
      
     // Event listener to the two range filtering inputs to redraw on input
-    $(\'#min, #max\').keyup( function() {
+    $(\'#start_date, #end_date\').keyup( function() {
         table.draw();
     } );
 
+
+    $(\'#event_period\').datepicker({
+        inputs: $(\'.actual_range\'),
+        format: \'yyyy/mm/dd\'
+    });
+
+    $.fn.dataTable.ext.search.push(
+        function( settings, data, dataIndex ) {
+            var start_date = Date.parse( $(\'#start_date\').val() ).valueOf();
+            var end_date = Date.parse( $(\'#end_date\').val() ).valueOf();
+            var date =  Date.parse( data[4] ).valueOf(); // use data for the date column
+
+            if ( ( isNaN( start_date ) && isNaN( end_date ) ) ||
+                ( isNaN( start_date ) && date <= end_date ) ||
+                ( start_date <= date   && isNaN( end_date ) ) ||
+                ( start_date <= date   && date <= end_date ) )
+            {
+                return true;
+            }
+            return false;
+        }
+    );
 ')
 !!}

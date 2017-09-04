@@ -21,4 +21,4 @@
 Encore\Admin\Form::forget(['map', 'editor']);
 Admin::css('//cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css');
 Admin::js('//cdn.datatables.net/1.10.16/js/jquery.dataTables.js');
-//Admin::js('//cdn.datatables.net/plug-ins/1.10.16/filtering/row-based/range_dates.js');
+Admin::css('//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css');
