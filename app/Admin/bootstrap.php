@@ -19,6 +19,6 @@
  */
 
 Encore\Admin\Form::forget(['map', 'editor']);
-Admin::css('//cdn.datatables.net/1.10.16/css/jquery.dataTables.css');
+Admin::css('//cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css');
 Admin::js('//cdn.datatables.net/1.10.16/js/jquery.dataTables.js');
 //Admin::js('//cdn.datatables.net/plug-ins/1.10.16/filtering/row-based/range_dates.js');

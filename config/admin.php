@@ -147,7 +147,9 @@ return [
     /*
      * Version displayed in footer.
      */
-    'version'   => '1.5.x-dev',
+    'version'   => '1.0.x-dev',
+
+    'powered_by' => 'Aosheng admin',
 
     /**
      * Settings for extensions.
