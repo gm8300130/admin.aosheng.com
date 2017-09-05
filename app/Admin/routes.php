@@ -13,4 +13,6 @@ Route::group([
     $router->get('/', 'ReportController@index');
 
     $router->get('/agentReport', 'ReportController@index');
+
+    $router->get('/getData', 'ReportController@getData');
 });

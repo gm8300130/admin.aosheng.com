@@ -5,7 +5,7 @@ namespace App\Admin\Models;
 use App\CustomCollection;
 use Illuminate\Database\Eloquent\Model;
 
-class ReportModel extends Model
+class Report extends Model
 {
     protected $guarded = ['id'];
     /**
