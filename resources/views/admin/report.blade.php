@@ -9,7 +9,7 @@ table.table-bordered > tbody > tr > td{
 }
 </style>
 
-<div>{{$data[1]['com']}}
+<div>{{--$data[1]['com']--}}
 
     <table border="0" cellspacing="5" cellpadding="5">
         <tbody>
@@ -17,10 +17,17 @@ table.table-bordered > tbody > tr > td{
                 <td>時間區間： </td>
                 <td>
                 <div id="event_period" class="input-group">
-                    <input id="start_date" name="start_date" type="text" class="form-control actual_range">
+                    <input id="start_date" name="start_date" type="text" class="form-control actual_range" value="{{$date}}">
                     <div class="input-group-addon">to</div>
-                    <input id="end_date" name="end_date" type="text" class="form-control actual_range">
+                    <input id="end_date" name="end_date" type="text" class="form-control actual_range"  value="{{$date}}">
                 </div>
+                </td>
+                <td>
+                &nbsp;
+                    <input type="button" id="today" class="btn btn-primary" value="今日">
+                    <input type="button" id="yesterday" class="btn btn-primary" value="昨日">
+                    <input type="button" id="this_week" class="btn btn-primary" value="本週">
+                    <input type="button" id="last_week" class="btn btn-primary" value="上週">
                 </td>
             </tr>
         </tbody>
@@ -530,8 +537,8 @@ $Admin->script('
 
     $.fn.dataTable.ext.search.push(
         function( settings, data, dataIndex ) {
-            var start_date = Date.parse( $(\'#start_date\').val() ).valueOf();
-            var end_date = Date.parse( $(\'#end_date\').val() ).valueOf();
+            var start_date = Date.parse( $(\'#start_date\').val() + \' 00:00:00\').valueOf();
+            var end_date = Date.parse( $(\'#end_date\').val() + \' 23:59:59\' ).valueOf();
             var date =  Date.parse( data[4] ).valueOf(); // use data for the date column
 
             if ( ( isNaN( start_date ) && isNaN( end_date ) ) ||
